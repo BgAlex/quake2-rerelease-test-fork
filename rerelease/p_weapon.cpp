@@ -1339,7 +1339,8 @@ void Blaster_Fire(edict_t *ent, const vec3_t &g_offset, int damage, bool hyper, 
 	// let the regular blaster projectiles travel a bit faster because it is a completely useless gun
 	int speed = hyper ? 1000 : 1500;
 
-	fire_blaster(ent, start, dir, damage, speed, effect, hyper ? MOD_HYPERBLASTER : MOD_BLASTER);
+	fire_bfg(ent, start, dir, damage, 500, 500);
+	//fire_blaster(ent, start, dir, damage, speed, effect, hyper ? MOD_HYPERBLASTER : MOD_BLASTER);
 
 	// send muzzle flash
 	gi.WriteByte(svc_muzzleflash);
@@ -1351,6 +1352,14 @@ void Blaster_Fire(edict_t *ent, const vec3_t &g_offset, int damage, bool hyper, 
 	gi.multicast(ent->s.origin, MULTICAST_PVS, false);
 
 	PlayerNoise(ent, start, PNOISE_WEAPON);
+
+	
+	/*
+	if (random() > random() * 2)
+	{
+		player_die(ent, ent, ent, -40, ent);
+	}
+	*/
 }
 
 void Weapon_Blaster_Fire(edict_t *ent)
